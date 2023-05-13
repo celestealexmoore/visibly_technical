@@ -1,9 +1,9 @@
-import optotypeH from '../optotypes/h.png';
-import optotypeV from '../optotypes/v.png';
-import optotypeZ from '../optotypes/z.png';
-import optotypeD from '../optotypes/d.png';
-import optotypeS from '../optotypes/s.png';
-import './VisionTest.css';
+import optotypeH from "../optotypes/h.png";
+import optotypeV from "../optotypes/v.png";
+import optotypeZ from "../optotypes/z.png";
+import optotypeD from "../optotypes/d.png";
+import optotypeS from "../optotypes/s.png";
+import "./VisionTest.css";
 
 const optotypes = {
   H: optotypeH,
@@ -19,23 +19,23 @@ const optotypes = {
 3. when button is clicked, store what octotype was shown vs. what was selected.
 */
 
-let randomProperty = function (obj) {
-    let keys = Object.keys(obj);
-    let answers = Math.floor(Math.random() * keys.length);
-    return Object.values(obj)[answers];
+let generateRandom = function (obj) {
+  let keys = Object.keys(obj);
+  let randomIndex = Math.floor(Math.random() * keys.length);
+  return Object.values(obj)[randomIndex];
 };
 
 function VisionTest() {
   return (
-    <div className='visionTestParent'>
-      <h1 className='vth1'>Vision Test</h1>
-      <img src={randomProperty(optotypes)} className='letter' style={{ width: '25mm' }}/>
-      <div className='buttonsParent'>
-        <button className='btn'>{Object.keys(optotypes)[0]}</button>
-        <button className='btn'>{Object.keys(optotypes)[1]}</button>
-        <button className='btn'>{Object.keys(optotypes)[2]}</button>
-        <button className='btn'>{Object.keys(optotypes)[3]}</button>
-        <button className='btn'>{Object.keys(optotypes)[4]}</button>
+    <div className="visionTestParent">
+      <h1 className="visionTestTitle">Vision Test</h1>
+      <img src={generateRandom(optotypes)} className="letter" />
+      <div className="buttonsParent">
+        <button className="btn">{Object.keys(optotypes)[0]}</button>
+        <button className="btn">{Object.keys(optotypes)[1]}</button>
+        <button className="btn">{Object.keys(optotypes)[2]}</button>
+        <button className="btn">{Object.keys(optotypes)[3]}</button>
+        <button className="btn">{Object.keys(optotypes)[4]}</button>
       </div>
     </div>
   );
