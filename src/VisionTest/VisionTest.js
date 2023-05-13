@@ -1,3 +1,4 @@
+import { useState } from "react";
 import optotypeH from "../optotypes/h.png";
 import optotypeV from "../optotypes/v.png";
 import optotypeZ from "../optotypes/z.png";
@@ -6,6 +7,10 @@ import optotypeS from "../optotypes/s.png";
 import "./VisionTest.css";
 
 function VisionTest() {
+  let [track, setTrack] = useState(1);
+  let [score, setScore] = useState(0);
+  let randomIndex;
+
   const optotypes = {
     H: optotypeH,
     V: optotypeV,
@@ -14,53 +19,77 @@ function VisionTest() {
     S: optotypeS,
   };
 
-  let generateRandom = function (obj) {
+  const optoIndex = Object.keys(optotypes);
+
+  let [source, setSource] = useState(generateRandom(optotypes));
+
+  function generateRandom(obj) {
     let keys = Object.keys(obj);
-    let randomIndex = Math.floor(Math.random() * keys.length);
+    randomIndex = Math.floor(Math.random() * keys.length);
     return Object.values(obj)[randomIndex];
-  };
+  }
 
   function whichBtn(btnId) {
     switch (btnId) {
-      case "h":
-        console.log(`The ${btnId} was clicked.`);
+      case "H":
+        keepScore(btnId);
+        setSource(generateRandom(optotypes));
         break;
-      case "v":
-        console.log(`The ${btnId} was clicked.`);
+      case "V":
+        keepScore(btnId);
+        setSource(generateRandom(optotypes));
         break;
-      case "z":
-        console.log(`The ${btnId} was clicked.`);
+      case "Z":
+        keepScore(btnId);
+        setSource(generateRandom(optotypes));
         break;
-      case "d":
-        console.log(`The ${btnId} was clicked.`);
+      case "D":
+        keepScore(btnId);
+        setSource(generateRandom(optotypes));
         break;
-      case "s":
-        console.log(`The ${btnId} was clicked.`);
+      case "S":
+        keepScore(btnId);
+        setSource(generateRandom(optotypes));
         break;
-      default:
-        console.log(`Sorry, that's not an option.`);
     }
+  }
+
+  function keepScore(btnId) {
+    setTrack(track + 1);
+    // console.log(`Question # ${track}. Score is ${score}.`);
+    if (btnId == Object.keys(optotypes)[randomIndex]) {
+      setScore(score + 1);
+    }
+  }
+
+  if (track === 11) {
+    console.log("game over.");
   }
 
   return (
     <div className="visionTestParent">
       <h1 className="visionTestTitle">Vision Test</h1>
-      <img src={generateRandom(optotypes)} className="letter" />
+      <p className="visionTestDescr">
+        Click the button on the left that corresponds with the letter that
+        appears in the middle of the screen. After the full set of selections is
+        made, the test is completed and your final result will be displayed.
+      </p>
+      <img src={source} className="letter" alt="Randomized Letter" />
       <div className="buttonsParent">
-        <button className="btn h" onClick={() => whichBtn("h")}>
-          {Object.keys(optotypes)[0]}
+        <button className="btn" onClick={() => whichBtn("H")}>
+          {optoIndex[0]}
         </button>
-        <button className="btn v" onClick={() => whichBtn("v")}>
-          {Object.keys(optotypes)[1]}
+        <button className="btn" onClick={() => whichBtn("V")}>
+          {optoIndex[1]}
         </button>
-        <button className="btn z" onClick={() => whichBtn("z")}>
-          {Object.keys(optotypes)[2]}
+        <button className="btn" onClick={() => whichBtn("Z")}>
+          {optoIndex[2]}
         </button>
-        <button className="btn d" onClick={() => whichBtn("d")}>
-          {Object.keys(optotypes)[3]}
+        <button className="btn" onClick={() => whichBtn("D")}>
+          {optoIndex[3]}
         </button>
-        <button className="btn s" onClick={() => whichBtn("s")}>
-          {Object.keys(optotypes)[4]}
+        <button className="btn" onClick={() => whichBtn("S")}>
+          {optoIndex[4]}
         </button>
       </div>
     </div>
